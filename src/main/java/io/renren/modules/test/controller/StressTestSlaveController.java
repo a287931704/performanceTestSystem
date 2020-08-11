@@ -77,7 +77,7 @@ public class StressTestSlaveController {
     @RequestMapping("/autoGet")
     @RequiresPermissions("test:stress:autoGet")
     public R autoGet() {
-        String result = StressTestUtils.doGet("http://bee-backend.baozun.com/external/outside/k8s/nodeinfo/?ProjectGroup=performance-team&AppServerName=jmeter-server&Env=sandbox");
+        String result = StressTestUtils.doGet("http://bee-backend.xxxxxx.com/external/outside/k8s/nodeinfo/?ProjectGroup=performance-team&AppServerName=jmeter-server&Env=sandbox");
         ArrayList new_slave = StressTestUtils.getNewSlave(result);
         for(Object slave_str: new_slave){
             StressTestSlaveEntity stressTestSlave = new StressTestSlaveEntity();
