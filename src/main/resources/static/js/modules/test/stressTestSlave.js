@@ -130,6 +130,23 @@ var vm = new Vue({
                 weight: "100"
             };
         },
+        autoGet: function () {
+            var url = "test/stressSlave/autoGet";
+            $.ajax({
+                type: "POST",
+                url: baseURL + url,
+                contentType: "application/json",
+                success: function (r) {
+                    if (r.code === 0) {
+                        // alert('操作成功', function(){
+                        vm.reload();
+                        // });
+                    } else {
+                        alert(r.msg);
+                    }
+                }
+            });
+        },
         update: function () {
             var slaveId = getSelectedRow();
             if (slaveId == null) {

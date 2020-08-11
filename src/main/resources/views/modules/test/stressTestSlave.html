@@ -28,15 +28,16 @@
             </div>
             <a class="btn btn-default" @click="query">查询</a>
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="autoGet"><i class="fa fa-plus"></i>&nbsp;自动获取</a>
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="clone"><i class="fa fa-pencil-square-o"></i>&nbsp;复制</a>
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="batchUpdateStatus(1)"><i class="fa fa-pencil-square-o"></i>&nbsp;启用</a>
-            <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="batchRestart()"><i class="fa fa-pencil-square-o"></i>&nbsp;重启</a>
+            <!--<a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="batchRestart()"><i class="fa fa-pencil-square-o"></i>&nbsp;重启</a>-->
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="batchUpdateStatus(0)"><i class="fa fa-pencil-square-o"></i>&nbsp;禁用</a>
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
             &nbsp;<input type="button" class="btn btn-success" @click="reload" value="刷新"/>
             <a v-if="hasPermission('test:stress')" class="btn btn-primary" @click="batchUpdateStatusForce(1)"><i class="fa fa-pencil-square-o"></i>&nbsp;手工启用</a>
-            <a class="btn btn-primary" @click="batchReload" value="校准" title="根据状态同步节点进程">&nbsp;校准</a>
+            <!--<a class="btn btn-primary" @click="batchReload" value="校准" title="根据状态同步节点进程">&nbsp;校准</a>-->
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
@@ -54,7 +55,7 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label">绑定用例ID</div>
                 <div class="col-sm-10">
-                    <input type="text" id="customerName" class="aaa form-control" v-model="stressTestSlave.caseId" @click="getConfirm" placeholder="绑定用例ID"/>
+                    <input type="text" id="customerName" class="form-control" v-model="stressTestSlave.caseId" @click="getConfirm" placeholder="绑定用例ID"/>
                     <div class="col-sm-10" id="projectSelectDiv" style="display: none;">
                         <!-- <li onclick="get('4df5','sdf')">sdf</li> -->
                         <table id="jqGrid1"></table>

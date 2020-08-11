@@ -89,7 +89,7 @@ public class ApiTestController {
         try {
             Runtime runTime = Runtime.getRuntime();
 
-            Process process = runTime.exec("python " + filePath + File.separator + "jiraExport_Summary.py" + " " + timeline);
+            Process process = runTime.exec("python3 " + filePath + File.separator + "jiraExport_Summary.py" + " " + timeline);
 //            Process process = runTime.exec("python3 /service/script/test.py");
             InputStreamReader ir = new InputStreamReader(process.getInputStream());
             InputStreamReader ir1 = new InputStreamReader(process.getErrorStream());
@@ -109,7 +109,7 @@ public class ApiTestController {
             sBuffer.append("脚本执行完成");
         } catch (Exception e) {
             e.printStackTrace();
-            return "执行python脚本失败";
+            return "执行python脚本失败:" + e.toString();
         }
 
         return sBuffer;

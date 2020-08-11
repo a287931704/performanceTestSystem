@@ -101,11 +101,14 @@ public class StressTestFileController {
     @SysLog("立即执行性能测试用例脚本文件")
     @RequestMapping("/runOnce")
     @RequiresPermissions("test:stress:runOnce")
-    public R run(@RequestBody Map<String, String> map) {
-        System.out.println(map);
-        return R.ok(stressTestFileService.run2(Long.parseLong(map.get("fileId")), Long.parseLong(map.get("caseId"))));
+//    public R run(@RequestBody Map<String, String> map) {
+//        System.out.println(map);
+//        return R.ok(stressTestFileService.run2(Long.parseLong(map.get("fileId")), Long.parseLong(map.get("caseId"))));
+//    }
+    public R run(@RequestBody StressTestFileEntity stressTestFileEntity) {
+//        System.out.println(map);
+        return R.ok(stressTestFileService.run2(stressTestFileEntity.getFileId(), stressTestFileEntity.getCaseId()));
     }
-
     /**
      * 立即停止性能测试脚本，仅有使用api方式时，才可以单独停止。
      */

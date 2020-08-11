@@ -1,5 +1,6 @@
 package io.renren.modules.test.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import io.renren.common.annotation.SysLog;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
@@ -12,6 +13,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +70,31 @@ public class StressTestSlaveController {
         return R.ok();
     }
 
+    /**
+     * 保存性能测试分布式节点
+     */
+    @SysLog("保存性能测试分布式节点信息")
+    @RequestMapping("/autoGet")
+    @RequiresPermissions("test:stress:autoGet")
+    public R autoGet() {
+        String result = StressTestUtils.doGet("http://bee-backend.baozun.com/external/outside/k8s/nodeinfo/?ProjectGroup=performance-team&AppServerName=jmeter-server&Env=sandbox");
+        ArrayList new_slave = StressTestUtils.getNewSlave(result);
+        for(Object slave_str: new_slave){
+            StressTestSlaveEntity stressTestSlave = new StressTestSlaveEntity();
+            stressTestSlave.setSlaveName("AutoGetPerformanceMachine");
+            stressTestSlave.setJmeterPort("1099");
+            stressTestSlave.setSshPort("22");
+            stressTestSlave.setUserName("vmuser");
+            stressTestSlave.setPasswd("vmuser@test");
+            stressTestSlave.setHomeDir("/opt/project/apache-jmeter-4.0");
+            stressTestSlave.setWeight("100");
+            stressTestSlave.setIp(slave_str.toString());
+            ValidatorUtils.validateEntity(stressTestSlave);
+            stressTestSlaveService.save(stressTestSlave);
+        }
+
+        return R.ok();
+    }
 
     /**
      * 修改性能测试分布式节点信息
